@@ -65,7 +65,7 @@ void QuickSort(double *a, const int left, const int right)
 		int i = left;
 		int j = right + 1;
 		do {
-			do j--; while (a[j] >= pivot); //find a key ≤pivot
+			do j--; while (a[j] > pivot); //find a key ≤pivot
 			do { i++; //find a key >pivot
 			} while (i < j && a[i] <= pivot);
 			if (i < j) {
@@ -73,8 +73,10 @@ void QuickSort(double *a, const int left, const int right)
 				swap_time++;
 			}
 		} while (i < j);
-		swap(pivot, a[j]); //place the pivot between 2 lists
-		swap_time++;
+		if (left != j){
+			swap(pivot, a[j]); //place the pivot between 2 lists
+			swap_time++;
+		}
 		QuickSort(a, left, j - 1); // recursion
 		QuickSort(a, j + 1, right); // recursion
 	}
