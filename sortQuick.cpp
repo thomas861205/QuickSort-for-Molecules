@@ -34,21 +34,21 @@ void qsort_middle(double *arr, int left, int right){
 
 void qsort_left(double *arr, int left, int right){
 	if (left < right){
-		double pivot = arr[left];
+		double &pivot = arr[left];
 
 		int i = left + 1;
 		int j = right;
 
 		while (i < j){
-			while (arr[i] <= pivot && i <= right) i++;
-			while (arr[j] > pivot && j >= left) j--;
+			while (arr[i] <= pivot && i < j) i++;
+			while (arr[j] > pivot && j > i) j--;
 			if (i < j){
 				swap(arr[i], arr[j]);
 				swap_time++;
 			}
 		} // by the time i should == j
 
-		if (j != left){
+		if (arr[j] < pivot){
 			swap(pivot, arr[j]);
 			swap_time++;
 		}
